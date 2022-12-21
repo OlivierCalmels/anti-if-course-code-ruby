@@ -1,3 +1,5 @@
+require_relative 'test_helper'   # require test_helper first
+
 require File.join(File.dirname(__FILE__), '../gilded_rose')
 require 'minitest/autorun'
 
