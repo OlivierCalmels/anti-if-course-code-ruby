@@ -1,5 +1,7 @@
-class GildedRose
+# frozen_string_literal:true
 
+# GildedRose class
+class GildedRose
   def initialize(items)
     @items = items
   end
@@ -65,15 +67,15 @@ class GildedRose
   end
 
   def sulfuras?(item)
-    item.name == "Sulfuras, Hand of Ragnaros"
+    item.name == 'Sulfuras, Hand of Ragnaros'
   end
 
   def backstage_pass?(item)
-    item.name == "Backstage passes to a TAFKAL80ETC concert"
+    item.name == 'Backstage passes to a TAFKAL80ETC concert'
   end
 
   def aged_brie?(item)
-    item.name == "Aged Brie"
+    item.name == 'Aged Brie'
   end
 
   def quality_less_than50(item)
@@ -89,6 +91,7 @@ class GildedRose
   end
 end
 
+# Item class
 class Item
   attr_accessor :name, :sell_in, :quality
 
