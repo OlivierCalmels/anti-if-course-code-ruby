@@ -9,11 +9,6 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if sulfuras?(item)
-        if item.quality > 0
-          if !sulfuras?(item)
-            decrease_quality(item)
-          end
-        end
       elsif genereric?(item)
         if item.quality > 0
           if !sulfuras?(item)
