@@ -6,31 +6,19 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       if sulfuras?(item)
       elsif genereric?(item)
         if item.quality > 0
-          if !sulfuras?(item)
-            decrease_quality(item)
-          end
+          decrease_quality(item)
         end
-      else
+      elsif aged_brie?(item)
         if quality_less_than50(item)
           increase_quality(item)
-          if backstage_pass?(item)
-            if item.sell_in < 11
-              if quality_less_than50(item)
-                increase_quality(item)
-              end
-            end
-            if item.sell_in < 6
-              if quality_less_than50(item)
-                increase_quality(item)
-              end
-            end
-          end
         end
+      elsif backstage_pass?(item)
+        handle_backstage_pass(item)
       end
       if !sulfuras?(item)
         item.sell_in = item.sell_in - 1
@@ -56,6 +44,22 @@ class GildedRose
   end
 
   private
+
+  def handle_backstage_pass(item)
+    increase_quality(item)
+    if quality_less_than50(item)
+      if item.sell_in < 11
+        if quality_less_than50(item)
+          increase_quality(item)
+        end
+      end
+      if item.sell_in < 6
+        if quality_less_than50(item)
+          increase_quality(item)
+        end
+      end
+    end
+  end
 
   def genereric?(item)
     !(sulfuras?(item) or backstage_pass?(item) or aged_brie?(item))
