@@ -21,7 +21,27 @@ class GildedRose
         end
       end
     end
+  end
 
+  # AgedBrie class
+  class AgedBrie
+    attr_reader :quality, :sell_in
+
+    def initialize(quality, sell_in)
+      @quality, @sell_in = quality, sell_in
+    end
+
+    def update
+      if @quality < 50
+        @quality = @quality + 1
+      end
+      @sell_in = @sell_in - 1
+      if @sell_in < 0
+        if @quality < 50
+          @quality = @quality + 1
+        end
+      end
+    end
   end
 
   def initialize(items)
@@ -37,15 +57,10 @@ class GildedRose
         item.quality = generic.quality
         item.sell_in = generic.sell_in
       elsif aged_brie?(item)
-        if item.quality < 50
-          item.quality = item.quality + 1
-        end
-        item.sell_in = item.sell_in - 1
-        if item.sell_in < 0
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
+        aged_brie = AgedBrie.new(item.quality, item.sell_in)
+        aged_brie.update
+        item.quality = aged_brie.quality
+        item.sell_in = aged_brie.sell_in
       elsif backstage_pass?(item)
         item.quality = item.quality + 1
         if item.quality < 50
