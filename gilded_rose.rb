@@ -1,7 +1,6 @@
 # frozen_string_literal:true
 
-# GildedRose class
-class GildedRose
+module Inventory
   # Generic class
   class Generic
     attr_reader :quality, :sell_in
@@ -84,18 +83,22 @@ class GildedRose
     def update
     end
   end
+end
+
+# GildedRose class
+class GildedRose
 
   # GoodCategory class
   class GoodCategory
     def build_for(item)
       if sulfuras?(item)
-        Sulfuras.new(item.quality, item.sell_in)
+        Inventory::Sulfuras.new(item.quality, item.sell_in)
       elsif generic?(item)
-        Generic.new(item.quality, item.sell_in)
+        Inventory::Generic.new(item.quality, item.sell_in)
       elsif aged_brie?(item)
-        AgedBrie.new(item.quality, item.sell_in)
+        Inventory::AgedBrie.new(item.quality, item.sell_in)
       elsif backstage_pass?(item)
-        BackstagePass.new(item.quality, item.sell_in)
+        Inventory::BackstagePass.new(item.quality, item.sell_in)
       end
     end
 
@@ -129,28 +132,6 @@ class GildedRose
       good.update
       item.quality = good.quality
       item.sell_in = good.sell_in
-
-      # if sulfuras?(item)
-      #   sulfuras = Sulfuras.new(item.quality, item.sell_in)
-      #   sulfuras.update
-      #   item.quality = sulfuras.quality
-      #   item.sell_in = sulfuras.sell_in
-      # elsif generic?(item)
-      #   generic = Generic.new(item.quality, item.sell_in)
-      #   generic.update
-      #   item.quality = generic.quality
-      #   item.sell_in = generic.sell_in
-      # elsif aged_brie?(item)
-      #   aged_brie = AgedBrie.new(item.quality, item.sell_in)
-      #   aged_brie.update
-      #   item.quality = aged_brie.quality
-      #   item.sell_in = aged_brie.sell_in
-      # elsif backstage_pass?(item)
-      #   backstage_pass = BackstagePass.new(item.quality, item.sell_in)
-      #   backstage_pass.update
-      #   item.quality = backstage_pass.quality
-      #   item.sell_in = backstage_pass.sell_in
-      # end
     end
   end
 end
