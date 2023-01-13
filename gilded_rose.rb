@@ -12,6 +12,10 @@ module Inventory
     def degrade
       @amount -= 1 if @amount > 0
     end
+
+    def increase
+      @amount += 1 if @amount < 50
+    end
   end
 
   # Generic class
@@ -37,21 +41,22 @@ module Inventory
 
   # AgedBrie class
   class AgedBrie
-    attr_reader :quality, :sell_in
+    attr_reader :sell_in
 
     def initialize(quality, sell_in)
-      @quality, @sell_in = quality, sell_in
+      @quality, @sell_in = Quality.new(quality), sell_in
+      # @quality, @sell_in = quality, sell_in
+    end
+
+    def quality
+      @quality.amount
     end
 
     def update
-      if @quality < 50
-        @quality = @quality + 1
-      end
-      @sell_in = @sell_in - 1
+      @quality.increase
+            @sell_in = @sell_in - 1
       if @sell_in < 0
-        if @quality < 50
-          @quality = @quality + 1
-        end
+        @quality.increase
       end
     end
   end
