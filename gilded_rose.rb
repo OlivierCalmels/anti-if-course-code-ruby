@@ -70,8 +70,8 @@ module Inventory
     end
 
     def update
-      @quality = @quality + 1
       if @quality < 50
+        @quality = @quality + 1
         if @sell_in < 11
           if @quality < 50
             @quality = @quality + 1
