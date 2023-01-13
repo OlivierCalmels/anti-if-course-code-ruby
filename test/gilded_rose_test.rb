@@ -4,6 +4,8 @@ require File.join(File.dirname(__FILE__), '../gilded_rose')
 
 # Run all tests with the command "rake test"
 class GildedRoseTest < Minitest::Test
+
+  cover "Inventory"
   def test_foo
     items = [Item.new('foo', 0, 0)]
     GildedRose.new(items).update_quality
