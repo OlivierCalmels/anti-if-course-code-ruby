@@ -71,9 +71,15 @@ class GildedRoseTest < Minitest::Test
   end
 
   def test_generic
-    items = [Item.new('foo', -1, 3)]
+    assert_generic_quality(1, -1, 3)
+    assert_generic_quality(1, 0, 3)
+    assert_generic_quality(2, 1, 3)
+  end
+
+  def assert_generic_quality(expected, sell_in, quality)
+    items = [Item.new('foo', sell_in, quality)]
     GildedRose.new(items).update_quality
-    assert_equal(1, items[0].quality)
+    assert_equal(expected, items[0].quality)
   end
 
   def assert_aged_brie_quality(expected, sell_in, quality)
