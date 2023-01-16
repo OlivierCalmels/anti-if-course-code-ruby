@@ -12,6 +12,14 @@ class GildedRoseTest < Minitest::Test
     assert_equal items[0].name, 'foo'
   end
 
+  def test_backstage_pass
+    assert_backstage_pass_quality(22, 8, 20)
+    assert_backstage_pass_quality(23, 4, 20)
+    assert_backstage_pass_quality(23, 4, 20)
+    assert_backstage_pass_quality(0, 0, 20)
+    assert_backstage_pass_quality(23, 1, 20)
+  end
+
   def test_report
     report_lines = []
     items = [
@@ -51,13 +59,6 @@ class GildedRoseTest < Minitest::Test
     items = [Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in, quality)]
     GildedRose.new(items).update_quality
     assert_equal(expected, items[0].quality)
-  end
-
-  def test_backstage_pass
-    assert_backstage_pass_quality(22, 8, 20)
-    assert_backstage_pass_quality(23, 4, 20)
-    assert_backstage_pass_quality(23, 4, 20)
-    assert_backstage_pass_quality(0, 0, 20)
   end
 
   def test_aged_brie
