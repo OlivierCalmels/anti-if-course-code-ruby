@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 ruby '3.0.3'
 gem 'minitest'
 
-gem 'mutant-minitest' #
+gem 'mutant-minitest' # , '~> 0.8.24'
 # Run this command to run mutant-minitest:
-# bundle exec mutant -r ./gilded_rose.rb -I test --use minitest Inventory::BackstagePass
+# bundle exec mutant run --include lib --require './gilded_rose.rb' --use minitest -- 'Inventory::BackstagePass'
 
 source 'https://oss:dOrNgEmlTycsVqJtCwfYpbP3fInu5Nu8@gem.mutant.dev' do
   gem 'mutant-license'

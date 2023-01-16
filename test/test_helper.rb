@@ -1,6 +1,5 @@
-require 'simplecov'            # These two lines must go first
+require 'simplecov'         # These two lines must go first
 SimpleCov.start
 
-require 'minitest/autorun'     # Sets up minitest
-# You could require other shared gems here, too
+require 'minitest/autorun'     # Set up minitest
 require 'mutant/minitest/coverage'
