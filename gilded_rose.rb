@@ -2,7 +2,7 @@
 
 module Inventory
   # Quality class
-  
+
   class Quality
     attr_reader :amount
 
@@ -84,20 +84,19 @@ module Inventory
     def update
       @quality.increase
       if @quality.less_than_50?
-        if @sell_in < 11
+        if sell_in < 11
           @quality.increase
         end
-        if @sell_in < 6
+        if sell_in < 6
           @quality.increase
         end
       end
-      @sell_in = @sell_in - 1
-      if @sell_in < 0
+      @sell_in = sell_in - 1
+      if sell_in < 0
         @quality.reset
       end
     end
   end
-
 end
 
 # GildedRose class
