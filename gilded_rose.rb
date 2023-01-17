@@ -72,11 +72,28 @@ class GildedRose
 
     # BackstagePass class
     class BackstagePass
+      def self.build(sell_in)
+        if sell_in < 0
+          Expired.new
+        else
+          new
+        end
+      end
+
+      class Expired
+        def update(quality, _)
+          quality.reset
+        end
+      end
+
       def update(quality, sell_in)
         quality.increase
-        quality.increase if sell_in < 10
-        quality.increase if sell_in < 5
-        quality.reset if sell_in < 0
+        if sell_in < 10
+          quality.increase
+        end
+        if sell_in < 5
+          quality.increase
+        end
       end
     end
   end
@@ -86,7 +103,7 @@ class GildedRose
     def build_for(item)
       case item.name
       when 'Backstage passes to a TAFKAL80ETC concert'
-        Inventory::BackstagePass.new
+        Inventory::BackstagePass.build(item.sell_in)
       when 'Aged Brie'
         Inventory::AgedBrie.build(item.sell_in)
       else
